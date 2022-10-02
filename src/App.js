@@ -6,7 +6,6 @@ import {
 } from "firebase/firestore";
 
 import { dummyData } from "./dummy_data";
-import "./app.css";
 
 import {
   Container,
