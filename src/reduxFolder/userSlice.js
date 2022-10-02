@@ -14,9 +14,12 @@ export const userSlice = createSlice({
         },
         markAsPaid: (state, action) => {
             state.usersArray =  state.usersArray.map((user)=>user.id===action.payload?{...user, is_paid: true}:user)
+        },
+        deleteAddData: (state, action) => {
+            state.usersArray = [];
         }
     }
 })
 
-export const {replaceToNewUsers, markAsPaid} = userSlice.actions;
+export const {replaceToNewUsers, markAsPaid, deleteAddData} = userSlice.actions;
 export default userSlice.reducer;

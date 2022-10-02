@@ -1,19 +1,24 @@
 import { useEffect } from "react";
 import { db } from "./firebase-config";
 import {
+  addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
 } from "firebase/firestore";
 
 import { dummyData } from "./dummy_data";
 
 import {
+  Button,
   Container,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { replaceToNewUsers} from "./reduxFolder/userSlice";
+import { deleteAddData, replaceToNewUsers} from "./reduxFolder/userSlice";
 
 import FilterHeader from "./components/FilterHeader";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 function App() {
   const usersArray = useSelector((state) => state.user.usersArray);
@@ -32,29 +37,34 @@ function App() {
     getUsers();
   }, []);
 
-  // const createUsers = () => {
-  //   dummyData.forEach(async (dummy) => {
-  //     await addDoc(usersCollectionRef, {
-  //       first_name: dummy.first_name,
-  //       last_name: dummy.last_name,
-  //       email_id: dummy.email_id,
-  //       is_paid: dummy.is_paid,
-  //     });
-  //   });
-  // };
+  const createUsers = () => {
+    dummyData.forEach(async (dummy) => {
+      await addDoc(usersCollectionRef, {
+        first_name: dummy.first_name,
+        last_name: dummy.last_name,
+        email_id: dummy.email_id,
+        is_paid: dummy.is_paid,
+      });
+    });
+  };
 
-  // const deleteUsers = () => {
-  //   users.forEach(async (user) => {
-  //     const userDoc = doc(db, "users", user.id);
-  //     await deleteDoc(userDoc);
-  //   });
-  // };
+  const deleteUsers = () => {
+    usersArray.forEach(async (user) => {
+      const userDoc = doc(db, "users", user.id);
+      try{
+        await deleteDoc(userDoc);
+        dispatch(deleteAddData());
+      }catch(err){
+        console.log("Error occur during deleting all data : ", err);
+      }
+    });
+  };
 
 
   return (
     <Container maxWidth="md">
       {/* <Button variant="contained" color="primary" onClick={createUsers}>Add Dummy Data</Button>
-    <Button variant="contained" color="primary" onClick={deleteUsers}>Delete All Data</Button> */}
+      <Button variant="contained" color="primary" onClick={deleteUsers}>Delete All Data</Button> */}
 
       <FilterHeader usersArray={usersArray} />
 
