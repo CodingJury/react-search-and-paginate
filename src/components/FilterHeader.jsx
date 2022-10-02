@@ -24,6 +24,12 @@ function FilterHeader(props) {
   const [queryResult, setQueryResult] = useState([]);
 
 
+  useEffect(()=>{
+    setQueryResult(usersArray);
+  },[usersArray])
+
+
+
   //------------------SEARCH----------------
 
   const searchFields = ["first_name", "last_name", "email_id"];
@@ -46,7 +52,7 @@ function FilterHeader(props) {
     dispatch(setCurrentPage(1));
     dispatch(setMinPageNumberLimit(0));
     dispatch(setMaxPageNumberLimit(pageNumberLimit));
-  }, [queryString, usersArray, showPaidStudent]);
+  }, [queryString, showPaidStudent]);
 
 
   return (
