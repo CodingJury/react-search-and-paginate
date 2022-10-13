@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 
 function DisplayTable(props) {
-  const { usersData } = props;
+  const { currentItems } = props;
   
 
   const showPaidStudent = useSelector((state) => state.query.showPaidStudents);
@@ -52,7 +52,7 @@ function DisplayTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {usersData.map((user, index) => (
+            {currentItems.map((user, index) => (
               <TableRow
                 key={user.id || index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -25,7 +25,9 @@ function FilterHeader(props) {
 
 
   useEffect(()=>{
-    setQueryResult(usersArray);
+    const sortedData = [...usersArray];
+    sortedData.sort((a,b)=>a.first_name.localeCompare(b.first_name));
+    setQueryResult(sortedData);
   },[usersArray])
 
 
@@ -44,6 +46,8 @@ function FilterHeader(props) {
     const newResult = showPaidStudent
       ? searchResult.filter((user) => user.is_paid === true)
       : searchResult;
+
+    newResult.sort((a,b)=>a.first_name.localeCompare(b.first_name));
 
     setQueryResult(newResult);
 

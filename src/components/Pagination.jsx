@@ -89,30 +89,33 @@ function Pagination(props) {
 
     
     <div style={{display:"flex", flexDirection:"column", alignItems: "center"}}>
-      <DisplayTable usersData={currentItems} />
-      {currentItems.length!==0 ? <><Stack style={{ marginTop: "20px"}} direction="row">
-        
-        <Button color="primary"
-          onClick={handlePrevBtn}
-          disabled={currentPage === pages[0] ? true : false}
-        >
-          Prev
-        </Button>
-        
-        {pageDecrementBtn}
-        {renderPageNumbers}
-        {pageIncrementBtn}
+      <DisplayTable currentItems={currentItems} />
+      {currentItems.length!==0 ? 
+      <>
+        <Stack style={{ marginTop: "20px"}} direction="row">
+          
+          <Button color="primary"
+            onClick={handlePrevBtn}
+            disabled={currentPage === pages[0] ? true : false}
+          >
+            Prev
+          </Button>
+          
+          {pageDecrementBtn}
+          {renderPageNumbers}
+          {pageIncrementBtn}
 
-        <Button color="primary"
-          onClick={handleNextBtn}
-          disabled={currentPage === pages[pages.length - 1] ? true : false}
-        >
-          Next
+          <Button color="primary"
+            onClick={handleNextBtn}
+            disabled={currentPage === pages[pages.length - 1] ? true : false}
+          >
+            Next
+          </Button>
+        </Stack>
+        <Button variant="contained" color="secondary" style={{marginTop: "20px"}} className="loadmore" onClick={handleLoadMore}>
+          Load More
         </Button>
-      </Stack>
-      <Button variant="contained" color="secondary" style={{marginTop: "20px"}} className="loadmore" onClick={handleLoadMore}>
-        Load More
-      </Button></>
+      </>
       :
       <Typography
         variant="h3"
